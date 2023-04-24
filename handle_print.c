@@ -1,8 +1,8 @@
-include "main.h"
+#include "main.h"
 /**
  * handle_print - Prints an argument based on its type
- * @fmt: Formatted string in which to print the arguments.
- * @list: List of arguments to be printed.
+ * @format: Formatted string in which to print the arguments.
+ * @args: List of arguments to be printed.
  * @ind: ind.
  * @buffer: Buffer array to handle print.
  * @flags: Calculates active flags
@@ -11,39 +11,39 @@ include "main.h"
  * @size: Size specifier
  * Return: 1 or 2;
  */
-int handle_print(const char *fmt, int *ind, va_list list, char buffer[],
+int handle_print(const char *format, int *ind, va_list args, char buffer[],
 	int flags, int width, int precision, int size)
 {
-	int i, unknow_len = 0, printed_chars = -1;
+	int i, un_known_len = 0, printed_chars = -1;
 	format_spec_t format_spec_types[] = {
-		{'c', print_char}, {'s', print_string}, {'%', print_percent},
-		{'i', print_int}, {'d', print_int}, {'b', print_binary},
+		{'c', print_character}, {'s', print_string}, {'%', print_percent_sign},
+		{'i', print_int}, {'d', print_int}, {'b', print_binary_num},
 		{'u', print_unsigned}, {'o', print_octal}, {'x', print_hexadecimal},
-		{'X', print_hexa_upper}, {'p', print_pointer}, {'S', print_non_printable},
-		{'r', print_reverse}, {'R', print_rot13string}, {'\0', NULL}
+		{'X', print_hexa_upper}, {'p', print_pointer}, {'S', print_un_printable},
+		{'r', print_rev}, {'R', print_rot13_str}, {'\0', NULL}
 	};
-	for (i = 0; fmt_types[i].fmt != '\0'; i++)
-		if (fmt[*ind] == fmt_types[i].fmt)
-			return (fmt_types[i].fn(list, buffer, flags, width, precision, size));
+	for (i = 0; format_spec[i].spec != '\0'; i++)
+		if (format[*ind] == format_spec[i].spec)
+			return (format_spec[i].func(args, buffer, flags, width, precision, size));
 
-	if (fmt_types[i].fmt == '\0')
+	if (format_spec[i].spec == '\0')
 	{
-		if (fmt[*ind] == '\0')
+		if (format[*ind] == '\0')
 			return (-1);
-		unknow_len += write(1, "%%", 1);
-		if (fmt[*ind - 1] == ' ')
-			unknow_len += write(1, " ", 1);
+		un_known__len += write(1, "%%", 1);
+		if (format[*ind - 1] == ' ')
+			un_known_len += write(1, " ", 1);
 		else if (width)
 		{
 			--(*ind);
-			while (fmt[*ind] != ' ' && fmt[*ind] != '%')
+			while (format[*ind] != ' ' && format[*ind] != '%')
 				--(*ind);
-			if (fmt[*ind] == ' ')
+			if (format[*ind] == ' ')
 				--(*ind);
 			return (1);
 		}
-		unknow_len += write(1, &fmt[*ind], 1);
-		return (unknow_len);
+		un_known_len += write(1, &format[*ind], 1);
+		return (un_known_len);
 	}
 	return (printed_chars);
 }

@@ -1,18 +1,18 @@
 #include "main.h"
 
 /**
- * handle_write_char - prints a string
+ * handle_write_charcter- prints a string
  * @c: char types.
  * @buffer: Buffer array to handle print
- * @flags:  Calculates active flags.
+ * @flags:  active flags.
  * @width: get width.
  * @precision: precision specifier
- * @size: Size specifier
+ * @size: size
  * Return: Number of chars printed.
  */
 int handle_write_character(char c, char buffer[],
 	int flags, int width, int precision, int size)
-{ /* char is stored at left and padding is on  buffer's right */
+{
 	int i = 0;
 	char padding = ' ';
 
