@@ -11,8 +11,8 @@
  * @size: Size specifier
  * Return: 1 or 2;
  */
-int handle_print_func(const char *format, int *ind, va_list args, char buffer[],
-	int flags, int width, int precision, int size)
+int handle_print_func(const char *format, int *ind, va_list args,
+		char buffer[], int flags, int width, int precision, int size)
 {
 	int i, un_known_len = 0, printed_chars = -1;
 	format_spec_t format_spec[] = {

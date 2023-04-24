@@ -127,10 +127,7 @@ int write_num(int ind, char buffer[], int flags, int width,
 					write(1, &buffer[ind], length - (1 - padding_start)));
 		}
 	}
-	if (extra_char)
-	{
-		buffer[--ind] = extra_char;
-	}
+	extra_char && buffer[--ind] = extra_char;
 	return (write(1, &buffer[ind], length));
 }
 
@@ -158,10 +155,8 @@ int write_unsigned_num(int is_negative, int ind,
 	if (precision > 0 && precision < length)
 		padding = ' ';
 	while (precision > length)
-	{
 		buffer[--ind] = '0';
 		length++;
-	}
 
 	if ((flags & F_ZERO) && !(flags & F_MINUS))
 		padding = '0';
@@ -171,13 +166,9 @@ int write_unsigned_num(int is_negative, int ind,
 			buffer[i] = padding;
 		buffer[i] = '\0';
 		if (flags & F_MINUS)
-		{
 			return (write(1, &buffer[ind], length) + write(1, &buffer[0], i));
-		}
 		else
-		{
 			return (write(1, &buffer[0], i) + write(1, &buffer[ind], length));
-		}
 	}
 	return (write(1, &buffer[ind], length));
 }
@@ -219,17 +210,13 @@ int write_pointer(char buffer[], int ind, int length,
 			buffer[--ind] = 'x';
 			buffer[--ind] = '0';
 			if (extra_char)
-			{
 				buffer[--ind] = extra_char;
-			}
 			return (write(1, &buffer[3], i - 3) + write(1, &buffer[ind], length));
 		}
 		else if (!(flags & F_MINUS) && padding == '0')
 		{
 			if (extra_char)
-			{
 				buffer[--padding_start] = extra_char;
-			}
 			buffer[1] = '0';
 			buffer[2] = 'x';
 			return (write(1, &buffer[padding_start], i - padding_start) +
@@ -238,10 +225,6 @@ int write_pointer(char buffer[], int ind, int length,
 	}
 	buffer[--ind] = 'x';
 	buffer[--ind] = '0';
-	if (extra_char)
-	{
-		buffer[--ind] = extra_char;
-	}
+	extra_char && buffer[--ind] = extra_char;
 	return (write(1, &buffer[ind], BUFFER_SIZE - ind - 1));
 }
-

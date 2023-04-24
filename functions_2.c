@@ -30,7 +30,7 @@ int print_pointer(va_list args, char buffer[],
 	while (number_address > 0)
 	{
 		buffer[index--] = map_to[number_address % 16];
-		number_address /= 16; 
+		number_address /= 16;
 		length++;
 	}
 	if ((flags & F_ZERO) && !(flags & F_MINUS))
