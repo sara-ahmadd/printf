@@ -127,7 +127,8 @@ int write_num(int ind, char buffer[], int flags, int width,
 					write(1, &buffer[ind], length - (1 - padding_start)));
 		}
 	}
-	extra_char && buffer[--ind] = extra_char;
+	if(extra_char) 
+		buffer[--ind] = extra_char;
 	return (write(1, &buffer[ind], length));
 }
 
@@ -235,6 +236,7 @@ int write_pointer(char buffer[], int ind, int length,
 	}
 	buffer[--ind] = 'x';
 	buffer[--ind] = '0';
-	extra_char && buffer[--ind] = extra_char;
+	if(extra_char)
+		buffer[--ind] = extra_char;
 	return (write(1, &buffer[ind], BUFFER_SIZE - ind - 1));
 }
