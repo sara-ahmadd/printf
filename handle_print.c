@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * handle_print - Prints an argument based on its type
+ * handle_print_func - Prints an argument based on its type
  * @format: Formatted string in which to print the arguments.
  * @args: List of arguments to be printed.
  * @ind: ind.
@@ -11,11 +11,11 @@
  * @size: Size specifier
  * Return: 1 or 2;
  */
-int handle_print(const char *format, int *ind, va_list args, char buffer[],
+int handle_print_func(const char *format, int *ind, va_list args, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	int i, un_known_len = 0, printed_chars = -1;
-	format_spec_t format_spec_types[] = {
+	format_spec_t format_spec[] = {
 		{'c', print_character}, {'s', print_string}, {'%', print_percent_sign},
 		{'i', print_int}, {'d', print_int}, {'b', print_binary_num},
 		{'u', print_unsigned}, {'o', print_octal}, {'x', print_hexadecimal},
@@ -30,7 +30,7 @@ int handle_print(const char *format, int *ind, va_list args, char buffer[],
 	{
 		if (format[*ind] == '\0')
 			return (-1);
-		un_known__len += write(1, "%%", 1);
+		un_known_len += write(1, "%%", 1);
 		if (format[*ind - 1] == ' ')
 			un_known_len += write(1, " ", 1);
 		else if (width)

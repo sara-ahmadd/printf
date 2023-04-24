@@ -37,13 +37,13 @@ int _printf(const char *format, ...)
 				precision = get_precision(format, &i, args);
 				size = get_size(format, &i);
 				++i;
-				characters_handeled = handle_print(format, &i, args, buffer,
+				characters_handeled = handle_print_func(format, &i, args, buffer,
 						flags, width, precision, size);
 				if (characters_handeled == -1)
 				{
 					return (-1);
 				}
-				printed_characters += characters_handeled
+				printed_characters += characters_handeled;
 			}
 		}
 		print_buffer(buffer, &buffer_index);

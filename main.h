@@ -1,6 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 #include <stdio.h>
+#include <limits.h>
 #include <stdarg.h>
 #include <unistd.h>
 #include <string.h>
@@ -88,5 +89,11 @@ int get_width(const char *format, int *list_i, va_list args);
 int get_flags(const char *format, int *i);
 int get_size(const char *format, int *list_i);
 int get_precision(const char *format, int *list_i, va_list args);
+
+int is_printable(char ch);
+int append_hexa_code(char ascii_code, char buffer[], int i);
+int is_digit(char c);
+long int convert_size_num(long int num, int size);
+long int convert_unsigned_num(unsigned long int num, int size);
 
 #endif

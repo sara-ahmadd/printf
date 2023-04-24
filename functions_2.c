@@ -29,8 +29,9 @@ int print_pointer(va_list args, char buffer[],
 	number_address = (unsigned long)address;
 	while (number_address > 0)
 	{
-		buffer[index--] = map_to[number % 16];
-		number /= 16, length++;
+		buffer[index--] = map_to[number_address % 16];
+		number_address /= 16; 
+		length++;
 	}
 	if ((flags & F_ZERO) && !(flags & F_MINUS))
 	{
@@ -86,7 +87,7 @@ int print_un_printable(va_list args, char buffer[],
 		}
 		i++;
 	}
-	buffer[i + offset] = '\0';
+	buffer[i + off_set] = '\0';
 	return (write(1, buffer, i + off_set));
 }
 
